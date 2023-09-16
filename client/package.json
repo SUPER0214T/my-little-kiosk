@@ -48,5 +48,6 @@
   },
   "msw": {
     "workerDirectory": "public"
-  }
+  },
+  "proxy": "http://localhost:8080"
 }
