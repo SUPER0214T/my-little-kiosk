@@ -1,7 +1,7 @@
 import React from 'react';
 
 function Order() {
-  return <div></div>;
+  return <div>Order페이지</div>;
 }
 
 export default Order;
