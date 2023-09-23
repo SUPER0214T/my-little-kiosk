@@ -6,6 +6,8 @@ import reportWebVitals from './reportWebVitals';
 import { worker } from './mocks/worker';
 import { Provider } from 'react-redux';
 import { store } from './redux/store';
+import { ThemeProvider } from '@emotion/react';
+import theme from './styles/theme';
 if (process.env.NODE_ENV === 'development') {
   worker.start();
 }
@@ -14,7 +16,9 @@ const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <ThemeProvider theme={theme}>
+        <App />
+      </ThemeProvider>
     </Provider>
   </React.StrictMode>,
 );
