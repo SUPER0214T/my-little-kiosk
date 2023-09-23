@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Order from './components/pages/Order/Order';
+import Order from './pages/Order/Order';
 import { ROUTES } from './constants/routes';
 import { reset } from './styles/globalStyle';
 import { Global } from '@emotion/react';
