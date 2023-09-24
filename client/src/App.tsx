@@ -4,18 +4,20 @@ import Order from './pages/Order/Order';
 import { ROUTES } from './constants/routes';
 import { reset } from './styles/globalStyle';
 import { Global } from '@emotion/react';
+import { Wrapper } from './App.styles';
+import Home from './pages/Home/Home';
 
 function App() {
   return (
-    <div>
+    <Wrapper>
       <Global styles={reset} />
       <BrowserRouter>
         <Routes>
-          <Route path={'/'} element={<div>임시 메인</div>} />
+          <Route path={ROUTES.HOME} element={<Home />} />
           <Route path={ROUTES.ORDER} element={<Order />} />
         </Routes>
       </BrowserRouter>
-    </div>
+    </Wrapper>
   );
 }
 
