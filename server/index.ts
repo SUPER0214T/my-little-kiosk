@@ -19,7 +19,7 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 app.get("/master", (req: Request, res: Response) => {
-  res.json(createItemData);
+  res.json(createItemData());
 });
 
 app.listen(8080, () => {
