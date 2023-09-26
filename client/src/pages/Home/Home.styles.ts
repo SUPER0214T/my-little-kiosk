@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import Bg from '../../assets/images/bg.gif';
 
 const Wrapper = styled.div`
   background-color: red;
@@ -9,6 +10,10 @@ const Wrapper = styled.div`
   height: 100vh;
   position: relative;
   min-height: 700px;
+  background-image: url(${Bg});
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 `;
 
 const OrderBtn = styled.div`
