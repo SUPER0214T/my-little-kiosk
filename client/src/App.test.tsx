@@ -49,7 +49,7 @@ describe('setup', () => {
       </MemoryRouter>,
     );
 
-    const text = await screen.findByText('Order페이지');
-    expect(text).toBeInTheDocument();
+    const orderText = await screen.findByText('Order페이지');
+    expect(orderText).toBeInTheDocument();
   });
 });
