@@ -1,5 +1,5 @@
 export const ROUTES = {
-  SCREEN_SAVER: '/screen-saver',
+  HOME: '/',
   ORDER: '/order',
   CHECKOUT: '/checkout',
   PAYMENT: '/payment',
