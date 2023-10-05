@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import Order from './pages/Order/Order';
 import { ROUTES } from './constants/routes';
 import { reset } from './styles/globalStyle';
@@ -11,12 +11,10 @@ function App() {
   return (
     <Wrapper>
       <Global styles={reset} />
-      <BrowserRouter>
-        <Routes>
-          <Route path={ROUTES.HOME} element={<Home />} />
-          <Route path={ROUTES.ORDER} element={<Order />} />
-        </Routes>
-      </BrowserRouter>
+      <Routes>
+        <Route path={ROUTES.HOME} element={<Home />} />
+        <Route path={ROUTES.ORDER} element={<Order />} />
+      </Routes>
     </Wrapper>
   );
 }
