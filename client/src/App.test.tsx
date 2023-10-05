@@ -27,6 +27,19 @@ describe('setup', () => {
     expect(orderButton).toBeInTheDocument();
   });
 
+  it('메인 페이지에는 마스터 수신 버튼이 존재한다.', async () => {
+    render(
+      <MemoryRouter initialEntries={['/']}>
+        <Provider store={store}>
+          <App />
+        </Provider>
+      </MemoryRouter>,
+    );
+
+    const masterDownButton = await screen.findByText('마스터 수신');
+    expect(masterDownButton).toBeInTheDocument();
+  });
+
   it('order 페이지에는 `Order페이지라는` 문구가 존재한다.', async () => {
     render(
       <MemoryRouter initialEntries={['/order']}>
