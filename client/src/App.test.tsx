@@ -1,9 +1,11 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import App from './App';
 import { MemoryRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { store } from './redux/store';
+// import { store } from './redux/store';
+import configureStore from 'redux-mock-store';
+import userEvent from '@testing-library/user-event';
 /**
  * 근데 아래의 것들을 굳이 테스트해야 할까?
  * 그래도 일단 제대로 호출 되었는지는 알아야 하니까 체크를 해보자. 공부도 할 겸
@@ -14,6 +16,11 @@ import { store } from './redux/store';
  */
 
 describe('setup', () => {
+  const mockStore = configureStore();
+  const store = mockStore({
+    master: { itemData: [] },
+  });
+
   it('메인 페이지에는 주문하기 버튼이 존재한다.', async () => {
     render(
       <MemoryRouter initialEntries={['/']}>
@@ -51,5 +58,20 @@ describe('setup', () => {
 
     const orderText = await screen.findByText('Order페이지');
     expect(orderText).toBeInTheDocument();
+  });
+
+  it('master 수신 버튼을 클릭하면 setItemData 액션 타입이 반환된다.', async () => {
+    render(
+      <MemoryRouter initialEntries={['/']}>
+        <Provider store={store}>
+          <App />
+        </Provider>
+      </MemoryRouter>,
+    );
+
+    const masterDownButton = await screen.findByText('마스터 수신');
+    userEvent.click(masterDownButton);
+
+    await waitFor(() => expect(store.getActions()[0]).toHaveProperty('type', 'masterSlice/setItemData'));
   });
 });
