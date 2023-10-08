@@ -18,7 +18,7 @@ app.get("/", (req: Request, res: Response) => {
   res.json(data);
 });
 
-app.get("/master", (req: Request, res: Response) => {
+app.get("/api/master", (req: Request, res: Response) => {
   res.json(createItemData());
 });
 

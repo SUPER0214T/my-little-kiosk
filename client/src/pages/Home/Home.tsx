@@ -19,6 +19,7 @@ const Home = () => {
 
   const handleMasterDownBtnClick = async () => {
     const response = await customAxios.get(API_LIST.MASTER.ALL);
+    // const response = await fetch(API_LIST.MASTER.ALL).then((res) => res.json());
     dispatch(setItemData(response.data));
   };
 
