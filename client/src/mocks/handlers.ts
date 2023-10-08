@@ -1,15 +1,34 @@
-import { rest } from "msw";
+import { rest } from 'msw';
 
-const todos = ["먹기", "자기", "놀기"];
+export const mockMasterItemData = [
+  {
+    IMG_URL: 'https://picsum.photos/id/736/200/300',
+    ITEM_CD: '37',
+    ITEM_NM: '티셔츠 237',
+    ITEM_PRIC: 1542,
+  },
+  {
+    IMG_URL: 'https://picsum.photos/id/15/200/300',
+    ITEM_CD: '86',
+    ITEM_NM: '원피스 886',
+    ITEM_PRIC: 6364,
+  },
+  {
+    IMG_URL: 'https://picsum.photos/id/523/200/300',
+    ITEM_CD: '95',
+    ITEM_NM: '바지 495',
+    ITEM_PRIC: 3768,
+  },
+  {
+    IMG_URL: 'https://picsum.photos/id/492/200/300',
+    ITEM_CD: '96',
+    ITEM_NM: '원피스 196',
+    ITEM_PRIC: 4598,
+  },
+];
 
 export const handlers = [
-  // 할일 목록
-  rest.get("/todos", (req, res, ctx) => {
-    return res(ctx.status(200), ctx.json(todos));
+  rest.get('/api/master', (req, res, ctx) => {
+    return res(ctx.json(mockMasterItemData));
   }),
-
-  // 할일 추가
-  rest.post("/todos", (req, res, ctx) => {
-    return res(ctx.status(201));
-  })
 ];
