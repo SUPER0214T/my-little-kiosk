@@ -1,13 +1,11 @@
 /** @jsxImportSource @emotion/react */
 import React from 'react';
-import styled from '@emotion/styled';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../constants/routes';
-import { customAxios } from '../../services/axios';
-import { API_LIST } from '../../constants/apiList';
 import { useAppDispatch } from '../../hooks/useStore';
 import { setItemData } from '../../redux/masterSlice';
 import { MasterDownBtn, OrderBtn, Wrapper } from './Home.styles';
+import { getMasterAll } from '../../services/master';
 
 const Home = () => {
   const navigate = useNavigate();
@@ -18,8 +16,7 @@ const Home = () => {
   };
 
   const handleMasterDownBtnClick = async () => {
-    const response = await customAxios.get(API_LIST.MASTER.ALL);
-    // const response = await fetch(API_LIST.MASTER.ALL).then((res) => res.json());
+    const response = await getMasterAll();
     dispatch(setItemData(response.data));
   };
 
