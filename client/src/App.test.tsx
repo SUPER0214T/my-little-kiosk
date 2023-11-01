@@ -60,16 +60,22 @@ describe('setup', () => {
     expect(masterDownButton).toBeInTheDocument();
   });
 
-  it('order 페이지에는 `Order페이지라는` 문구가 존재한다.', async () => {
+  it('order 페이지에는 `티셔츠 237`이 존재한다.', async () => {
     render(
-      <MemoryRouter initialEntries={['/order']}>
+      <MemoryRouter initialEntries={['/']}>
         <Provider store={store}>
           <App />
         </Provider>
       </MemoryRouter>,
     );
 
-    const orderText = await screen.findByText('Order페이지');
+    const masterDownButton = await screen.findByText('마스터 수신');
+    userEvent.click(masterDownButton);
+
+    const orderBtn = await screen.findByText('주문하기');
+    userEvent.click(orderBtn);
+
+    const orderText = await screen.findByText('티셔츠 237');
     expect(orderText).toBeInTheDocument();
   });
 
