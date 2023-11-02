@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-
-type BasketItem = { itemCd: string; qty: number };
+import { BasketItem } from '../types/basket';
 
 export interface InitialState {
   basketList: BasketItem[];
