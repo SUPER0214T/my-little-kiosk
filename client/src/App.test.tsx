@@ -107,6 +107,5 @@ describe('setup', () => {
     userEvent.click(masterDownButton);
 
     await waitFor(() => expect(store.getState().masterReducer.itemData).toHaveLength(4));
-    console.log(store.getState().masterReducer.itemData);
   });
 });
