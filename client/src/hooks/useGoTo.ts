@@ -8,7 +8,7 @@ export const useGoTo = () => {
 
   const goToHome = () => goTo(ROUTES.HOME);
   const goToOrder = () => goTo(ROUTES.ORDER);
-  const goToOrderDetail = () => goTo(ROUTES.ORDER_DETAIL);
+  const goToOrderDetail = (itemCd: string) => goTo(`${ROUTES.ORDER}/${itemCd}`);
   const goToCheckout = () => goTo(ROUTES.CHECKOUT);
   const goToPayment = () => goTo(ROUTES.PAYMENT);
   const goToConfirmation = () => goTo(ROUTES.CONFIRMATION);
