@@ -7,6 +7,7 @@ import { Global, ThemeProvider } from '@emotion/react';
 import { Wrapper } from './App.styles';
 import Home from './pages/Home/Home';
 import theme from './styles/theme';
+import OrderDetail from './pages/OrderDetail/OrderDetail';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Routes>
           <Route path={ROUTES.HOME} element={<Home />} />
           <Route path={ROUTES.ORDER} element={<Order />} />
+          <Route path={ROUTES.ORDER_DETAIL} element={<OrderDetail />} />
         </Routes>
       </Wrapper>
     </ThemeProvider>
