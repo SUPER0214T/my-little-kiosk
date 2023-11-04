@@ -1,20 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import Header from '../../components/common/Header/Header';
 import { useAppDispatch, useAppSelector } from '../../hooks/useStore';
 import { ItemData } from '../../types/master';
-import { ROUTES } from '../../constants/routes';
 import { addBasketItem } from '../../redux/basketSlice';
 import { CancelBtn, ConfirmBtn, Footer, ItemCode, ItemInfo, ItemName, ItemPrice } from './OrderDetail.styles';
+import { useGoTo } from '../../hooks/useGoTo';
 
 function OrderDetail() {
   const { itemCd } = useParams();
   const { itemData } = useAppSelector((state) => state.masterReducer);
   const [itemInfo, setItemInfo] = useState<ItemData>();
-  const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const { goToOrder } = useGoTo();
 
-  const goToHome = () => navigate(ROUTES.ORDER);
   /**
    * @todo 공통 함수로 추출할 것
    */
@@ -30,7 +29,7 @@ function OrderDetail() {
     if (!itemCd) return;
 
     dispatch(addBasketItem(itemCd));
-    goToHome();
+    goToOrder();
   };
 
   if (!itemInfo) {
@@ -62,7 +61,7 @@ function OrderDetail() {
       <Footer>
         {/*@todo 이렇게 딱하나의 역할만 한다면 굳이 handleCancelClick을 따로 만들 필요가 있을까? */}
         {/*@todo 아래의 버튼들을 재사용 가능하게 만들 수 있지 않을까? */}
-        <CancelBtn onClick={goToHome}>취소</CancelBtn>
+        <CancelBtn onClick={goToOrder}>취소</CancelBtn>
         <ConfirmBtn onClick={handleConfirmClick}>구매하기</ConfirmBtn>
       </Footer>
     </div>

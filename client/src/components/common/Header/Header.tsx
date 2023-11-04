@@ -1,13 +1,12 @@
 import React from 'react';
 import { HomeBtn, Logo, Wrapper } from './Header.styles';
-import { useNavigate } from 'react-router-dom';
-import { ROUTES } from '../../../constants/routes';
+import { useGoTo } from '../../../hooks/useGoTo';
 
 function Header() {
-  const navigate = useNavigate();
+  const { goToHome } = useGoTo();
 
   const handleHomeBtnClick = () => {
-    navigate(ROUTES.HOME);
+    goToHome();
   };
 
   return (

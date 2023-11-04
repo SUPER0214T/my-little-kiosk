@@ -1,18 +1,17 @@
 /** @jsxImportSource @emotion/react */
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { ROUTES } from '../../constants/routes';
 import { useAppDispatch } from '../../hooks/useStore';
 import { setItemData } from '../../redux/masterSlice';
 import { MasterDownBtn, OrderBtn, Wrapper } from './Home.styles';
 import { getMasterAll } from '../../services/master';
+import { useGoTo } from '../../hooks/useGoTo';
 
 const Home = () => {
-  const navigate = useNavigate();
+  const { goToOrder } = useGoTo();
   const dispatch = useAppDispatch();
 
   const handleOrderBtnClick = () => {
-    navigate(ROUTES.ORDER);
+    goToOrder();
   };
 
   const handleMasterDownBtnClick = async () => {
