@@ -5,7 +5,6 @@ import { mockMasterItemData } from '../../../../mocks/handlers';
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { goToOrderFlow, renderSimplify } from '../../../../utils/testUtils';
-import { store } from '../../../../redux/store';
 
 describe('OrderItem', () => {
   let mockAxios = new MockAdapter(customAxios);
@@ -44,7 +43,7 @@ describe('OrderItem', () => {
   });
 
   it('제품 상세 페이지에서 "구매하기"를 누르면 order로 이동하고 해당 상품을 store에 등록한다.', async () => {
-    renderSimplify();
+    const { mockStore } = renderSimplify();
     await goToOrderFlow();
 
     const firstOrderItem = await screen.findByText('티셔츠 237');
@@ -62,6 +61,6 @@ describe('OrderItem', () => {
     // @todo dispatch 잘 되었는지 확인해야 함.
     //   아래의 getState로 확인하는 방법 이외의 방법은 없을까?
     //   toHaveProperty 이외의 다른 괜찮은 방법이 없을까?
-    expect(store.getState().basketReducer.basketList[0]).toHaveProperty('itemCd', '37');
+    expect(mockStore.getState().basketReducer.basketList[0]).toHaveProperty('itemCd', '37');
   });
 });
