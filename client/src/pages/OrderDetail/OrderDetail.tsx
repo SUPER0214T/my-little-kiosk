@@ -1,25 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Header from '../../components/common/Header/Header';
-import { useAppDispatch, useAppSelector } from '../../hooks/useStore';
+import { useAppDispatch } from '../../hooks/useStore';
 import { ItemData } from '../../types/master';
 import { addBasketItem } from '../../redux/basketSlice';
 import { CancelBtn, ConfirmBtn, Footer, ItemCode, ItemInfo, ItemName, ItemPrice } from './OrderDetail.styles';
 import { useGoTo } from '../../hooks/useGoTo';
+import useMaster from '../../hooks/useMaster';
 
 function OrderDetail() {
   const { itemCd } = useParams();
-  const { itemData } = useAppSelector((state) => state.masterReducer);
   const [itemInfo, setItemInfo] = useState<ItemData>();
   const dispatch = useAppDispatch();
   const { goToOrder } = useGoTo();
-
-  /**
-   * @todo 공통 함수로 추출할 것
-   */
-  const findItemByItemCd = (itemCd: string = ''): ItemData | undefined => {
-    return itemData.find((item) => item.ITEM_CD === itemCd);
-  };
+  const { findItemByItemCd } = useMaster();
 
   useEffect(() => {
     setItemInfo(findItemByItemCd(itemCd));
