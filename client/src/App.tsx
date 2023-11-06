@@ -8,6 +8,7 @@ import { Wrapper } from './App.styles';
 import Home from './pages/Home/Home';
 import theme from './styles/theme';
 import OrderDetail from './pages/OrderDetail/OrderDetail';
+import Checkout from './pages/Checkout/Checkout';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path={ROUTES.HOME} element={<Home />} />
           <Route path={ROUTES.ORDER} element={<Order />} />
           <Route path={ROUTES.ORDER_DETAIL} element={<OrderDetail />} />
+          <Route path={ROUTES.CHECKOUT} element={<Checkout />} />
         </Routes>
       </Wrapper>
     </ThemeProvider>
