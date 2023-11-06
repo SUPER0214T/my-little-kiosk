@@ -1,10 +1,11 @@
 /** @jsxImportSource @emotion/react */
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useAppDispatch } from '../../hooks/useStore';
 import { setItemData } from '../../redux/masterSlice';
 import { MasterDownBtn, OrderBtn, Wrapper } from './Home.styles';
 import { getMasterAll } from '../../services/master';
 import { useGoTo } from '../../hooks/useGoTo';
+import { resetBasketList } from '../../redux/basketSlice';
 
 const Home = () => {
   const { goToOrder } = useGoTo();
@@ -18,6 +19,10 @@ const Home = () => {
     const response = await getMasterAll();
     dispatch(setItemData(response.data));
   };
+
+  useEffect(() => {
+    dispatch(resetBasketList());
+  }, []);
 
   return (
     <Wrapper>
