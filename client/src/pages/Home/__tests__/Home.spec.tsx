@@ -3,7 +3,6 @@ import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 describe('Home', () => {
-  //@todo 아래 테스트 작성
   it('Home에서는 장바구니가 비어있다.', async () => {
     const { mockStore } = renderSimplify();
     await goToOrderFlow();

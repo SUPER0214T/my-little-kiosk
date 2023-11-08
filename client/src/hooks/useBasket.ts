@@ -1,23 +1,14 @@
-import { useAppSelector } from './useStore';
-import useMaster from './useMaster';
+import { BasketItem } from '../types/basket';
+import { CombineBasketInfo } from '../pages/Checkout/Checkout';
 
-const useBasket = () => {
-  const { basketList } = useAppSelector((state) => state.basketReducer);
-  const { findItemByItemCd } = useMaster();
-
-  /**
-   * @todo 하나의 가격을 구하는 빼내서 재사용 가능할 듯
-   */
-  const getTotalBasketAmount = () => {
-    return basketList.reduce((sum, basketItem) => {
-      const itemInfo = findItemByItemCd(basketItem.itemCd);
-      if (!itemInfo) {
-        console.error(`basket ${basketItem.itemCd}(itemCd)의 정보가 master에 존재하지 않습니다.`);
-
-        return sum + 0;
-      }
-
-      return sum + itemInfo?.ITEM_PRIC * basketItem.qty;
+/**
+ * @todo 어차피 baksetList를 useBasket을 가져오면서 전달하거나 내부 함수들에게 인지로 전달해야 함.
+ *   그럴 바에 그냥 useBasket 가져오면서 전달해주면 더 깔끔한 거 아닌가? 마치 constructor에서 가져온 거 처럼
+ */
+const useBasket = (basketList: BasketItem[]) => {
+  const getTotalBasketAmount = (basketItemInfoList: CombineBasketInfo[]) => {
+    return basketItemInfoList.reduce((sum, basketItem) => {
+      return sum + basketItem.ITEM_PRIC * basketItem.qty;
     }, 0);
   };
 
