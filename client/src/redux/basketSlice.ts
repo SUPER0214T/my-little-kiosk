@@ -27,8 +27,18 @@ const basketSlice = createSlice({
 
       return state;
     },
+    increaseBasketItemQty: (state, action: PayloadAction<{ index: number }>) => {
+      state.basketList[action.payload.index].qty++;
+
+      return state;
+    },
+    decreaseBasketItemQty: (state, action: PayloadAction<{ index: number }>) => {
+      state.basketList[action.payload.index].qty--;
+
+      return state;
+    },
   },
 });
 
-export const { addBasketItem, resetBasketList } = basketSlice.actions;
+export const { addBasketItem, resetBasketList, increaseBasketItemQty, decreaseBasketItemQty } = basketSlice.actions;
 export default basketSlice.reducer;
