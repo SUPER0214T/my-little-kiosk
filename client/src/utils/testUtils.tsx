@@ -22,6 +22,15 @@ export const createStore = () =>
     devTools: process.env.NODE_ENV === 'development',
   });
 
+// utils
+export const buyOneItem = async (itemName: string = '티셔츠 237') => {
+  const orderItem = await screen.findByText(itemName);
+  userEvent.click(orderItem);
+
+  const confirmBtn = await screen.findByText('구매하기');
+  userEvent.click(confirmBtn);
+};
+
 // flow
 export const goToOrderFlow = async () => {
   const masterDownButton = await screen.findByText('마스터 수신');
@@ -31,6 +40,26 @@ export const goToOrderFlow = async () => {
   userEvent.click(orderBtn);
 };
 
+// buyCallbck에는 buyOneItem이 여러 개 들어가는 콜백을 넣으면 됨.
+export const goToCheckoutFlow = async (buyCallback?: () => Promise<void>) => {
+  await goToOrderFlow();
+
+  if (buyCallback) {
+    await buyCallback();
+  } else {
+    await buyOneItem();
+  }
+
+  const checkoutBtn = await screen.findByText('결제하기');
+  userEvent.click(checkoutBtn);
+};
+
+export const goToPaymentFlow = async (buyCallback?: () => Promise<void>) => {
+  await goToCheckoutFlow(buyCallback);
+
+  const goToPaymentBtn = await screen.findByText('결제하기');
+  userEvent.click(goToPaymentBtn);
+};
 // render
 /**
  * @desc mockStore를 사용하여 이전 테스트의 store에 접근하는 것을 방지
