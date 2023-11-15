@@ -6,6 +6,7 @@ import { MasterDownBtn, OrderBtn, Wrapper } from './Home.styles';
 import { getMasterAll } from '../../services/master';
 import { useGoTo } from '../../hooks/useGoTo';
 import { resetBasketList } from '../../redux/basketSlice';
+import { resetPaymentInfo } from '../../redux/paymentSlice';
 
 const Home = () => {
   const { goToOrder } = useGoTo();
@@ -22,6 +23,7 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(resetBasketList());
+    dispatch(resetPaymentInfo());
   }, []);
 
   return (
