@@ -37,4 +37,21 @@ describe('Payment', () => {
     const headerHomeBtn = await screen.findByText('Home');
     expect(headerHomeBtn).not.toBeInTheDocument();
   });
+
+  it('페이지에서 결제 방법을 선택하면 payment store가 업데이트된다.', async () => {
+    const { mockStore } = renderSimplify();
+    await goToCheckoutFlow(async () => {
+      await buyOneItem('티셔츠 237');
+      await buyOneItem('원피스 886');
+    });
+
+    const checkoutBtn = await screen.findByText('결제하기');
+    userEvent.click(checkoutBtn);
+
+    const paymentCreditBtn = await screen.findByText('credit');
+    userEvent.click(paymentCreditBtn);
+
+    expect(mockStore.getState().paymentReducer.credit.totalPaymentAmount).toBe(7906);
+    expect(mockStore.getState().paymentReducer.naver.totalPaymentAmount).toBe(0);
+  });
 });
