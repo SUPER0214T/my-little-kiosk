@@ -1,4 +1,4 @@
-import { buyOneItem, goToOrderFlow, renderSimplify } from '../../../utils/testUtils';
+import { buyOneItem, goToCheckoutFlow, goToOrderFlow, renderSimplify } from '../../../utils/testUtils';
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
@@ -24,4 +24,17 @@ describe('Payment', () => {
 
   // it('취소 버튼을 클릭하면 결제 정보를 삭제하고 order페이지로 이동한다.', async () => {});
   // it('결제 수단에는 카드, 네이버, 카카오가 존재한다.', async () => {});
+  it('페이지에는 Home 버튼이 존재하지 않는다.', async () => {
+    renderSimplify();
+    await goToCheckoutFlow(async () => {
+      await buyOneItem('티셔츠 237');
+      await buyOneItem('원피스 886');
+    });
+
+    const checkoutBtn = await screen.findByText('결제하기');
+    userEvent.click(checkoutBtn);
+
+    const headerHomeBtn = await screen.findByText('Home');
+    expect(headerHomeBtn).not.toBeInTheDocument();
+  });
 });
