@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks/useStore';
 import Header from '../../components/common/Header/Header';
 import { useGoTo } from '../../hooks/useGoTo';
 import * as S from './Payment.styles';
-import { updatePaymentInfo } from '../../redux/paymentSlice';
+import { resetPaymentInfo, updatePaymentInfo } from '../../redux/paymentSlice';
 
 const PAYMENT_TYPE = ['credit', 'naver', 'kakao'];
 
@@ -17,6 +17,7 @@ function Payment() {
   const { goToOrder } = useGoTo();
 
   const handleCancelClick = () => {
+    dispatch(resetPaymentInfo());
     goToOrder();
   };
 

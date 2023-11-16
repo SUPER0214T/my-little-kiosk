@@ -1,6 +1,7 @@
 import { buyOneItem, goToCheckoutFlow, goToOrderFlow, renderSimplify } from '../../../utils/testUtils';
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { CouponBtn } from '../../../components/domain/Order/OrderFooter/OrderFooter.styles';
 
 describe('Payment', () => {
   it('총 결제금액이 표시된다.', async () => {
@@ -22,8 +23,6 @@ describe('Payment', () => {
     expect(totalPaymentAmount).toBeInTheDocument();
   });
 
-  // it('취소 버튼을 클릭하면 결제 정보를 삭제하고 order페이지로 이동한다.', async () => {});
-  // it('결제 수단에는 카드, 네이버, 카카오가 존재한다.', async () => {});
   it('페이지에는 Home 버튼이 존재하지 않는다.', async () => {
     renderSimplify();
     await goToCheckoutFlow(async () => {
@@ -53,5 +52,26 @@ describe('Payment', () => {
 
     expect(mockStore.getState().paymentReducer.credit.totalPaymentAmount).toBe(7906);
     expect(mockStore.getState().paymentReducer.naver.totalPaymentAmount).toBe(0);
+  });
+
+  it('취소 버튼을 클릭하면 결제 정보를 삭제하고 order페이지로 이동한다.', async () => {
+    const { mockStore } = renderSimplify();
+    await goToCheckoutFlow(async () => {
+      await buyOneItem('티셔츠 237');
+      await buyOneItem('원피스 886');
+    });
+
+    const checkoutBtn = await screen.findByText('결제하기');
+    userEvent.click(checkoutBtn);
+
+    const cancelBtn = await screen.findByText('취소');
+    userEvent.click(cancelBtn);
+
+    const couponBtn = await screen.findByText('쿠폰');
+    expect(couponBtn).toBeInTheDocument();
+
+    expect(mockStore.getState().paymentReducer.naver.totalPaymentAmount).toBe(0);
+    expect(mockStore.getState().paymentReducer.credit.totalPaymentAmount).toBe(0);
+    expect(mockStore.getState().paymentReducer.kakao.totalPaymentAmount).toBe(0);
   });
 });
