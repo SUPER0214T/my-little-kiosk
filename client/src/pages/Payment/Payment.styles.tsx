@@ -20,18 +20,19 @@ export const PaymentList = styled.div`
   flex-wrap: wrap;
 `;
 
-export const PaymentCard = styled.div`
+export const PaymentCard = styled.div<{ isSelected: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
   width: 200px;
   height: 100px;
-  border: 1px solid black;
+  border: 1px solid #d9d9d9;
   border-radius: 1rem;
   font-size: 2rem;
   cursor: pointer;
   flex-wrap: wrap;
   margin: 1rem;
+  border-color: ${(props) => (props.isSelected ? 'black' : '#d9d9d9')};
 `;
 
 export const TotalPaymentAmount = styled.div`
@@ -60,5 +61,9 @@ export const Btn = css`
 `;
 
 export const CancelBtn = styled.div`
+  ${Btn};
+`;
+
+export const ConfirmBtn = styled.div`
   ${Btn};
 `;
