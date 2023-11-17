@@ -4,7 +4,7 @@ import { useGoTo } from '../../../hooks/useGoTo';
 import { ROUTES } from '../../../constants/routes';
 import { useLocation } from 'react-router-dom';
 
-const blackList = [ROUTES.PAYMENT];
+const blackList = [ROUTES.PAYMENT, ROUTES.CONFIRMATION];
 
 function Header() {
   const { goToHome } = useGoTo();
