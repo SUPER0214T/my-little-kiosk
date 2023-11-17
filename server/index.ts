@@ -6,6 +6,8 @@ import { createItemData } from "./utils/createItemData";
 
 const app = express();
 
+let callNo = 1;
+
 app.use(express.json());
 app.use(morgan("tiny"));
 
@@ -20,6 +22,10 @@ app.get("/", (req: Request, res: Response) => {
 
 app.get("/api/master", (req: Request, res: Response) => {
   res.json(createItemData());
+});
+
+app.post("/api/tr/save", (req: Request, res: Response) => {
+  res.json({ CALL_NO: callNo++ });
 });
 
 app.listen(8080, () => {
