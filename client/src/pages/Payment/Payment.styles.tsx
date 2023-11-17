@@ -48,7 +48,7 @@ export const Footer = styled.div`
   align-items: center;
 `;
 
-export const Btn = css`
+const Btn = css`
   display: flex;
   justify-content: center;
   align-items: center;
