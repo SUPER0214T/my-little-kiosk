@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import React, { useEffect } from 'react';
-import { useAppDispatch } from '../../hooks/useStore';
+import { useAppDispatch, useAppSelector } from '../../hooks/useStore';
 import { setItemData } from '../../redux/masterSlice';
 import { MasterDownBtn, OrderBtn, Wrapper } from './Home.styles';
 import { getMasterAll } from '../../services/master';
@@ -11,8 +11,12 @@ import { resetPaymentInfo } from '../../redux/paymentSlice';
 const Home = () => {
   const { goToOrder } = useGoTo();
   const dispatch = useAppDispatch();
+  const { itemData } = useAppSelector((state) => state.masterReducer);
 
   const handleOrderBtnClick = () => {
+    const isMasterEmpty = itemData.length === 0;
+    if (isMasterEmpty) return;
+
     goToOrder();
   };
 
