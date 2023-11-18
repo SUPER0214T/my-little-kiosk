@@ -1,7 +1,6 @@
 import { buyOneItem, goToCheckoutFlow, goToOrderFlow, renderSimplify } from '../../../utils/testUtils';
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { CouponBtn } from '../../../components/domain/Order/OrderFooter/OrderFooter.styles';
 
 describe('Payment', () => {
   it('총 결제금액이 표시된다.', async () => {
@@ -37,7 +36,7 @@ describe('Payment', () => {
     expect(headerHomeBtn).not.toBeInTheDocument();
   });
 
-  it('페이지에서 결제 방법을 선택하면 payment store가 업데이트된다.', async () => {
+  it('페이지에서 결제 버튼을 선택하면 payment store가 업데이트된다.', async () => {
     const { mockStore } = renderSimplify();
     await goToCheckoutFlow(async () => {
       await buyOneItem('티셔츠 237');
@@ -49,6 +48,9 @@ describe('Payment', () => {
 
     const paymentCreditBtn = await screen.findByText('credit');
     userEvent.click(paymentCreditBtn);
+
+    const paymentBtn = await screen.findByText('결제');
+    userEvent.click(paymentBtn);
 
     expect(mockStore.getState().paymentReducer.credit.totalPaymentAmount).toBe(7906);
     expect(mockStore.getState().paymentReducer.naver.totalPaymentAmount).toBe(0);
