@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/useStore';
 import { setItemData } from '../../redux/masterSlice';
 import { MasterDownBtn, OrderBtn, Wrapper } from './Home.styles';
@@ -12,17 +12,23 @@ const Home = () => {
   const { goToOrder } = useGoTo();
   const dispatch = useAppDispatch();
   const { itemData } = useAppSelector((state) => state.masterReducer);
+  const [isMasterDownloading, setIsMasterDownloading] = useState(false);
 
   const handleOrderBtnClick = () => {
     const isMasterEmpty = itemData.length === 0;
-    if (isMasterEmpty) return;
+    if (isMasterEmpty) {
+      throw new Error('master가 비어있습니다.');
+    }
 
     goToOrder();
   };
 
   const handleMasterDownBtnClick = async () => {
+    // 이 부분이 문제가 될 수 있다. 마스터 수신 클릭하고 바로 주문하기 누르면 응답 안온 상태로 넘어가려고 하니까 문제 발생
+    setIsMasterDownloading(true);
     const response = await getMasterAll();
     dispatch(setItemData(response.data));
+    setIsMasterDownloading(false);
   };
 
   useEffect(() => {
@@ -33,7 +39,9 @@ const Home = () => {
   return (
     <Wrapper>
       <MasterDownBtn onClick={handleMasterDownBtnClick}>마스터 수신</MasterDownBtn>
-      <OrderBtn onClick={handleOrderBtnClick}>주문하기</OrderBtn>
+      <OrderBtn onClick={handleOrderBtnClick} isDisabled={isMasterDownloading}>
+        주문하기
+      </OrderBtn>
     </Wrapper>
   );
 };

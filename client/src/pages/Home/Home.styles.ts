@@ -16,12 +16,12 @@ const Wrapper = styled.div`
   background-repeat: no-repeat;
 `;
 
-const OrderBtn = styled.div`
+const OrderBtn = styled.div<{ isDisabled: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 2rem;
-  background-color: white;
+  background-color: ${(props) => (props.isDisabled ? 'gray' : 'white')};
   padding: 32px 56px;
   border-radius: 16px;
   margin-left: 50px;
