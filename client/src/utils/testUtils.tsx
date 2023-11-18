@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import userEvent from '@testing-library/user-event';
@@ -37,6 +37,18 @@ export const goToOrderFlow = async () => {
   userEvent.click(masterDownButton);
 
   const orderBtn = await screen.findByText('주문하기');
+  await waitFor(
+    () => {
+      expect(orderBtn).toHaveStyle({ backgroundColor: 'white' });
+    },
+    {
+      timeout: 1000,
+      onTimeout: (error) => {
+        console.error(error);
+        return error;
+      },
+    },
+  );
   userEvent.click(orderBtn);
 };
 
