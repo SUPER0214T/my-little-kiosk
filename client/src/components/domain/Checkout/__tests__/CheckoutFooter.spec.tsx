@@ -1,4 +1,4 @@
-import { goToOrderFlow, renderSimplify } from '../../../../utils/testUtils';
+import { buyOneItem, goToOrderFlow, goToPaymentFlow, renderSimplify } from '../../../../utils/testUtils';
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
@@ -26,5 +26,11 @@ describe('CheckoutFooter', () => {
     expect(couponBtn).toBeInTheDocument();
   });
 
-  // it('결제하기를 클릭하면 Payment로 이동한다.', async () => {});
+  it('결제하기를 클릭하면 Payment로 이동한다.', async () => {
+    renderSimplify();
+    await goToPaymentFlow(async () => buyOneItem('티셔츠 237'));
+
+    const paymentTitle = await screen.findByText('결제 방법을 선택해주세요.');
+    expect(paymentTitle).toBeInTheDocument();
+  });
 });
