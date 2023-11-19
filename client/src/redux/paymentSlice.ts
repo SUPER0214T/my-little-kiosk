@@ -1,7 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-
-// @todo 아래 타입 분리 필요
-export type PaymentType = 'credit' | 'naver' | 'kakao';
+import { PaymentType } from '../types/payment';
 
 type InitialState = {
   [key in PaymentType]: {

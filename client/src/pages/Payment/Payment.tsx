@@ -5,9 +5,10 @@ import { useAppDispatch, useAppSelector } from '../../hooks/useStore';
 import Header from '../../components/common/Header/Header';
 import { useGoTo } from '../../hooks/useGoTo';
 import * as S from './Payment.styles';
-import { PaymentType, resetPaymentInfo, updatePaymentInfo } from '../../redux/paymentSlice';
+import { resetPaymentInfo, updatePaymentInfo } from '../../redux/paymentSlice';
+import { PaymentType } from '../../types/payment';
 
-const PAYMENT_TYPE = ['credit', 'naver', 'kakao'];
+const PAYMENT_TYPE: PaymentType[] = ['credit', 'naver', 'kakao'];
 
 function Payment() {
   const { basketReducer, masterReducer } = useAppSelector((state) => state);
@@ -24,7 +25,7 @@ function Payment() {
 
   // @todo 컴포넌트 분리 필요
   const dispatch = useAppDispatch();
-  const handlePaymentCardClick = (currentPaymentType: string) => {
+  const handlePaymentCardClick = (currentPaymentType: PaymentType) => {
     switch (currentPaymentType) {
       case 'credit':
         setCurrentPaymentType('credit');
