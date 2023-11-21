@@ -1,21 +1,25 @@
 /** @jsxImportSource @emotion/react */
-import React, { useEffect, useState } from 'react';
-import { useAppDispatch, useAppSelector } from '../../hooks/useStore';
-import { setItemData } from '../../redux/masterSlice';
+import React from 'react';
 import { MasterDownBtn, OrderBtn, Wrapper } from './Home.styles';
 import { getMasterAll } from '../../services/master';
 import { useGoTo } from '../../hooks/useGoTo';
-import { resetBasketList } from '../../redux/basketSlice';
-import { resetPaymentInfo } from '../../redux/paymentSlice';
+import { useQuery } from 'react-query';
+import { ItemData } from '../../types/master';
 
 const Home = () => {
   const { goToOrder } = useGoTo();
-  const dispatch = useAppDispatch();
-  const { itemData } = useAppSelector((state) => state.masterReducer);
-  const [isMasterDownloading, setIsMasterDownloading] = useState(false);
+  const { data, isLoading, refetch } = useQuery<{ data: ItemData[] }>(['home', 'getMasterAll'], getMasterAll, {
+    cacheTime: 1000 * 60 * 60 * 24,
+    staleTime: 1000 * 60 * 60 * 24,
+    onError: (err) => {
+      console.log(err);
+    },
+    // enabled: false,
+  });
 
   const handleOrderBtnClick = () => {
-    const isMasterEmpty = itemData.length === 0;
+    console.log(data);
+    const isMasterEmpty = data?.data.length === 0;
     if (isMasterEmpty) {
       throw new Error('master가 비어있습니다.');
     }
@@ -24,22 +28,13 @@ const Home = () => {
   };
 
   const handleMasterDownBtnClick = async () => {
-    // 이 부분이 문제가 될 수 있다. 마스터 수신 클릭하고 바로 주문하기 누르면 응답 안온 상태로 넘어가려고 하니까 문제 발생
-    setIsMasterDownloading(true);
-    const response = await getMasterAll();
-    dispatch(setItemData(response.data));
-    setIsMasterDownloading(false);
+    refetch();
   };
-
-  useEffect(() => {
-    dispatch(resetBasketList());
-    dispatch(resetPaymentInfo());
-  }, []);
 
   return (
     <Wrapper>
       <MasterDownBtn onClick={handleMasterDownBtnClick}>마스터 수신</MasterDownBtn>
-      <OrderBtn onClick={handleOrderBtnClick} isDisabled={isMasterDownloading}>
+      <OrderBtn onClick={handleOrderBtnClick} isDisabled={isLoading}>
         주문하기
       </OrderBtn>
     </Wrapper>
