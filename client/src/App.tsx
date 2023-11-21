@@ -11,21 +11,26 @@ import OrderDetail from './pages/OrderDetail/OrderDetail';
 import Checkout from './pages/Checkout/Checkout';
 import Confirmation from './pages/Confirmation/Confirmation';
 import Payment from './pages/Payment/Payment';
+import { QueryClient, QueryClientProvider } from 'react-query';
+
+const queryClient = new QueryClient();
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <Wrapper>
-        <Global styles={reset} />
-        <Routes>
-          <Route path={ROUTES.HOME} element={<Home />} />
-          <Route path={ROUTES.ORDER} element={<Order />} />
-          <Route path={ROUTES.ORDER_DETAIL} element={<OrderDetail />} />
-          <Route path={ROUTES.CHECKOUT} element={<Checkout />} />
-          <Route path={ROUTES.PAYMENT} element={<Payment />} />
-          <Route path={ROUTES.CONFIRMATION} element={<Confirmation />} />
-        </Routes>
-      </Wrapper>
+      <QueryClientProvider client={queryClient}>
+        <Wrapper>
+          <Global styles={reset} />
+          <Routes>
+            <Route path={ROUTES.HOME} element={<Home />} />
+            <Route path={ROUTES.ORDER} element={<Order />} />
+            <Route path={ROUTES.ORDER_DETAIL} element={<OrderDetail />} />
+            <Route path={ROUTES.CHECKOUT} element={<Checkout />} />
+            <Route path={ROUTES.PAYMENT} element={<Payment />} />
+            <Route path={ROUTES.CONFIRMATION} element={<Confirmation />} />
+          </Routes>
+        </Wrapper>
+      </QueryClientProvider>
     </ThemeProvider>
   );
 }
