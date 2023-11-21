@@ -1,14 +1,22 @@
 import { ItemData } from '../types/master';
-import { useAppSelector } from './useStore';
+import { useGetQueryData } from './useReactQuery';
 
 const useMaster = () => {
-  const { itemData } = useAppSelector((state) => state.masterReducer);
+  const itemData = useGetQueryData<{ data: ItemData[] }>(['home', 'getMasterAll']);
 
-  const findItemByItemCd = (itemCd: string = ''): ItemData | undefined => {
-    return itemData.find((item) => item.ITEM_CD === itemCd);
+  const getMasterData = (): ItemData[] => {
+    if (itemData) {
+      return itemData.data;
+    }
+
+    throw new Error('master 정보가 존재하지 않습니다.\nmaster 다운로드를 진행해주세요.');
   };
 
-  return { findItemByItemCd };
+  const findItemByItemCd = (itemCd: string = ''): ItemData | undefined => {
+    return getMasterData().find((item) => item.ITEM_CD === itemCd);
+  };
+
+  return { findItemByItemCd, getMasterData };
 };
 
 export default useMaster;
