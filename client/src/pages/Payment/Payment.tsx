@@ -7,13 +7,15 @@ import { useGoTo } from '../../hooks/useGoTo';
 import * as S from './Payment.styles';
 import { resetPaymentInfo, updatePaymentInfo } from '../../redux/paymentSlice';
 import { PaymentType } from '../../types/payment';
+import useMaster from '../../hooks/useMaster';
 
 const PAYMENT_TYPE: PaymentType[] = ['credit', 'naver', 'kakao'];
 
 function Payment() {
-  const { basketReducer, masterReducer } = useAppSelector((state) => state);
+  const { basketReducer } = useAppSelector((state) => state);
   const { getTotalBasketAmount } = useBasket(basketReducer.basketList);
-  const totalBasketAmount = getTotalBasketAmount(combineBasketInfo(basketReducer.basketList, masterReducer.itemData));
+  const { getMasterData } = useMaster();
+  const totalBasketAmount = getTotalBasketAmount(combineBasketInfo(basketReducer.basketList, getMasterData()));
   const [currentPaymentType, setCurrentPaymentType] = useState<PaymentType>('credit');
 
   const { goToOrder, goToConfirmation } = useGoTo();

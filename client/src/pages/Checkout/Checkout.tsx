@@ -6,6 +6,7 @@ import useBasket from '../../hooks/useBasket';
 import { useAppSelector } from '../../hooks/useStore';
 import { BasketItem } from '../../types/basket';
 import { ItemData } from '../../types/master';
+import useMaster from '../../hooks/useMaster';
 
 export type CombineBasketInfo = ItemData & { qty: number };
 
@@ -21,10 +22,11 @@ export const combineBasketInfo = (basketList: BasketItem[], master: ItemData[]) 
 };
 
 function Checkout() {
-  const { basketReducer, masterReducer } = useAppSelector((state) => state);
+  const { basketReducer } = useAppSelector((state) => state);
   const { getTotalBasketAmount } = useBasket(basketReducer.basketList);
+  const { getMasterData } = useMaster();
 
-  const totalBasketAmount = getTotalBasketAmount(combineBasketInfo(basketReducer.basketList, masterReducer.itemData));
+  const totalBasketAmount = getTotalBasketAmount(combineBasketInfo(basketReducer.basketList, getMasterData()));
 
   return (
     <div>
