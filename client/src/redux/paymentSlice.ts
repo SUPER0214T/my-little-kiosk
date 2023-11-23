@@ -23,10 +23,8 @@ const paymentSlice = createSlice({
   name: 'paymentSlice',
   initialState,
   reducers: {
-    resetPaymentInfo: (state) => {
-      state = initialState;
-
-      return state;
+    resetPaymentInfo: () => {
+      return initialState;
     },
     updatePaymentInfo: (state, action: PayloadAction<{ paymentType: PaymentType; paymentAmount: number }>) => {
       state[action.payload.paymentType].totalPaymentAmount = action.payload.paymentAmount;

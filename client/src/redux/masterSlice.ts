@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { ItemData } from '../types/master';
 
-export interface InitialState {
+interface InitialState {
   itemData: ItemData[];
 }
 

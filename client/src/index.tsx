@@ -1,13 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { worker } from './mocks/worker';
-import { Provider } from 'react-redux';
 import { store } from './redux/store';
-import { ThemeProvider } from '@emotion/react';
-import theme from './styles/theme';
-import { BrowserRouter } from 'react-router-dom';
 
 if (process.env.NODE_ENV === 'development') {
   worker.start();

@@ -6,7 +6,7 @@ function OrderList() {
   const { getMasterData } = useMaster();
 
   return (
-    <div className="order-list" data-testid={'order-list'}>
+    <div className="order-list" data-testid="order-list">
       {getMasterData().map((item) => (
         <OrderItem itemData={item} />
       ))}

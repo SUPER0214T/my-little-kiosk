@@ -13,12 +13,13 @@ const PAYMENT_TYPE: PaymentType[] = ['credit', 'naver', 'kakao'];
 
 function Payment() {
   const { basketReducer } = useAppSelector((state) => state);
-  const { getTotalBasketAmount } = useBasket(basketReducer.basketList);
+  const { getTotalBasketAmount } = useBasket();
   const { getMasterData } = useMaster();
   const totalBasketAmount = getTotalBasketAmount(combineBasketInfo(basketReducer.basketList, getMasterData()));
   const [currentPaymentType, setCurrentPaymentType] = useState<PaymentType>('credit');
 
   const { goToOrder, goToConfirmation } = useGoTo();
+  const dispatch = useAppDispatch();
 
   const handleCancelClick = () => {
     dispatch(resetPaymentInfo());
@@ -26,9 +27,8 @@ function Payment() {
   };
 
   // @todo 컴포넌트 분리 필요
-  const dispatch = useAppDispatch();
-  const handlePaymentCardClick = (currentPaymentType: PaymentType) => {
-    switch (currentPaymentType) {
+  const handlePaymentCardClick = (paymentType: PaymentType) => {
+    switch (paymentType) {
       case 'credit':
         setCurrentPaymentType('credit');
         break;
@@ -39,8 +39,7 @@ function Payment() {
         setCurrentPaymentType('kakao');
         break;
       default:
-        throw new Error(`${currentPaymentType}는 처리될 수 없는 paymentType입니다.`);
-        break;
+        throw new Error(`${paymentType}는 처리될 수 없는 paymentType입니다.`);
     }
   };
 

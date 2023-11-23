@@ -11,10 +11,10 @@ function Confirmation() {
   const { goToHome } = useGoTo();
 
   useEffect(() => {
-    postTrSave(basketList).then((res) => {
+    postTrSave().then((res) => {
       setCallNo(res.data.CALL_NO);
     });
-  }, []);
+  }, [basketList]);
 
   return (
     <div>

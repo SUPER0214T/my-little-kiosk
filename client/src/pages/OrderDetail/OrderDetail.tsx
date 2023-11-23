@@ -17,7 +17,7 @@ function OrderDetail() {
 
   useEffect(() => {
     setItemInfo(findItemByItemCd(itemCd));
-  }, [itemCd]);
+  }, [itemCd, findItemByItemCd]);
 
   const handleConfirmClick = () => {
     if (!itemCd) return;
@@ -35,7 +35,7 @@ function OrderDetail() {
       <Header />
       <ItemInfo>
         <div className="info-left">
-          <img src={itemInfo.IMG_URL} />
+          <img src={itemInfo.IMG_URL} alt="제품 이미지" />
         </div>
         <div className="info-right">
           <ItemCode>
@@ -53,8 +53,8 @@ function OrderDetail() {
         </div>
       </ItemInfo>
       <Footer>
-        {/*@todo 이렇게 딱하나의 역할만 한다면 굳이 handleCancelClick을 따로 만들 필요가 있을까? */}
-        {/*@todo 아래의 버튼들을 재사용 가능하게 만들 수 있지 않을까? */}
+        {/* @todo 이렇게 딱하나의 역할만 한다면 굳이 handleCancelClick 따로 만들 필요가 있을까? */}
+        {/* @todo 아래의 버튼들을 재사용 가능하게 만들 수 있지 않을까? */}
         <CancelBtn onClick={goToOrder}>취소</CancelBtn>
         <ConfirmBtn onClick={handleConfirmClick}>구매하기</ConfirmBtn>
       </Footer>

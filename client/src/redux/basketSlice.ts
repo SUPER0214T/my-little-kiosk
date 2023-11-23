@@ -28,12 +28,12 @@ const basketSlice = createSlice({
       return state;
     },
     increaseBasketItemQty: (state, action: PayloadAction<{ index: number }>) => {
-      state.basketList[action.payload.index].qty++;
+      state.basketList[action.payload.index].qty += 1;
 
       return state;
     },
     decreaseBasketItemQty: (state, action: PayloadAction<{ index: number }>) => {
-      state.basketList[action.payload.index].qty--;
+      state.basketList[action.payload.index].qty -= 1;
 
       return state;
     },

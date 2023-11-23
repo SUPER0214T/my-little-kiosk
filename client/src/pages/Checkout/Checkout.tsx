@@ -23,7 +23,7 @@ export const combineBasketInfo = (basketList: BasketItem[], master: ItemData[]) 
 
 function Checkout() {
   const { basketReducer } = useAppSelector((state) => state);
-  const { getTotalBasketAmount } = useBasket(basketReducer.basketList);
+  const { getTotalBasketAmount } = useBasket();
   const { getMasterData } = useMaster();
 
   const totalBasketAmount = getTotalBasketAmount(combineBasketInfo(basketReducer.basketList, getMasterData()));

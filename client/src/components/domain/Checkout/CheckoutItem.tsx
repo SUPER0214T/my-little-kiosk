@@ -44,7 +44,7 @@ function CheckoutItem({ basketItem, index }: CheckoutItemProps) {
     <S.Item>
       <div className="item-info">
         <div className="left">
-          <img className="item-image" src={itemInfo.IMG_URL} />
+          <img className="item-image" src={itemInfo.IMG_URL} alt="상품 이미지" />
         </div>
         <div className="right">
           <div className="item-name">{itemInfo.ITEM_NM}</div>

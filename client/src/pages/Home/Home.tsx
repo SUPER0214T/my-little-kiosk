@@ -1,12 +1,12 @@
 /** @jsxImportSource @emotion/react */
 import React from 'react';
+import { useQuery } from 'react-query';
 import { MasterDownBtn, OrderBtn, Wrapper } from './Home.styles';
 import { getMasterAll } from '../../services/master';
 import { useGoTo } from '../../hooks/useGoTo';
-import { useQuery } from 'react-query';
 import { ItemData } from '../../types/master';
 
-const Home = () => {
+function Home() {
   const { goToOrder } = useGoTo();
   const { data, isLoading, refetch } = useQuery<{ data: ItemData[] }>(['home', 'getMasterAll'], getMasterAll, {
     cacheTime: 1000 * 60 * 60 * 24,
@@ -39,6 +39,6 @@ const Home = () => {
       </OrderBtn>
     </Wrapper>
   );
-};
+}
 
 export default Home;
