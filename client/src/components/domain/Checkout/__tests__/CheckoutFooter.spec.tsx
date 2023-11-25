@@ -1,4 +1,4 @@
-import { buyOneItem, goToOrderFlow, goToPaymentFlow, renderSimplify } from '../../../../utils/testUtils';
+import { buyOneItem, goToOrderFlow, goToPaymentFlow, renderSimplify } from '../../../../utils/testUtils.spec';
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
