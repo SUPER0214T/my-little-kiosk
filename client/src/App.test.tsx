@@ -1,4 +1,4 @@
-import { screen, waitFor } from '@testing-library/react';
+import { renderHook, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import MockAdapter from 'axios-mock-adapter';
 import { customAxios } from './services/axios';
@@ -69,12 +69,20 @@ describe('setup', () => {
   //   await waitFor(() => expect(store.getActions()[0]).toHaveProperty('type', 'masterSlice/setItemData'));
   // });
 
-  it('master 수신 버튼을 클릭하면 store에 데이터가 저장된다.', async () => {
-    const { mockStore } = renderSimplify();
-
+  it('master 수신 버튼을 클릭하면 react query의 cache에 데이터가 저장된다.', async () => {
+    const { queryClient } = renderSimplify();
     const masterDownButton = await screen.findByText('마스터 수신');
     userEvent.click(masterDownButton);
 
-    await waitFor(() => expect(mockStore.getState().masterReducer.itemData).toHaveLength(4));
+    const wrapper = ({ children }: { children: React.ReactNode }) => (
+      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+    );
+
+    const { result } = renderHook(() => useGetQueryData<{ data: ItemData[] }>(['home', 'getMasterAll']), {
+      wrapper,
+    });
+
+    console.log('result: ', result.current?.data);
+    await waitFor(() => expect(result.current?.data).toHaveLength(4));
   });
 });
