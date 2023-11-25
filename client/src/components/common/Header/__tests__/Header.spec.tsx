@@ -5,14 +5,16 @@ import { goToOrderFlow, renderSimplify } from '../../../../utils/testUtils';
 
 describe('Header 컴포넌트', () => {
   it('Home 버튼이 존재한다.', async () => {
-    renderSimplify(['/order']);
+    renderSimplify();
+    await goToOrderFlow();
 
     const homeBtn = await screen.findByText('Home');
     expect(homeBtn).toBeInTheDocument();
   });
 
   it('Home 버튼을 클릭하면 Home으로 이동한다.', async () => {
-    renderSimplify(['/order']);
+    renderSimplify();
+    await goToOrderFlow();
 
     const homeBtn = await screen.findByText('Home');
     userEvent.click(homeBtn);
