@@ -7,6 +7,7 @@ import React from 'react';
 import { configureStore } from '@reduxjs/toolkit';
 import { rootReducer } from '../redux/rootReducer';
 import logger from 'redux-logger';
+import { QueryCache, QueryClient, QueryClientProvider } from 'react-query';
 
 // redux
 export const createStore = () =>
@@ -78,10 +79,13 @@ export const goToPaymentFlow = async (buyCallback?: () => Promise<void>) => {
  */
 export const renderSimplify = (initialEntries: string[] = ['/']) => {
   const mockStore = createStore();
+  const queryClient = new QueryClient();
   const renderResult = render(
     <MemoryRouter initialEntries={initialEntries}>
       <Provider store={mockStore}>
-        <App />
+        <QueryClientProvider client={queryClient}>
+          <App />
+        </QueryClientProvider>
       </Provider>
     </MemoryRouter>,
   );
@@ -89,6 +93,7 @@ export const renderSimplify = (initialEntries: string[] = ['/']) => {
   return {
     mockStore,
     renderResult,
+    queryClient,
   };
 };
 
@@ -102,4 +107,10 @@ const insideRender = (initialEntries: string[] = ['/']) => {
       </Provider>
     </MemoryRouter>
   );
+};
+
+// react-query
+export const clearCache = () => {
+  const queryCache = new QueryCache();
+  queryCache.clear();
 };

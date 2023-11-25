@@ -4,7 +4,10 @@ import MockAdapter from 'axios-mock-adapter';
 import { customAxios } from './services/axios';
 import { API_LIST } from './constants/apiList';
 import { mockMasterItemData } from './mocks/handlers';
-import { goToOrderFlow, renderSimplify } from './utils/testUtils.spec';
+import { goToOrderFlow, renderSimplify } from './utils/testUtils';
+import { useGetQueryData } from './hooks/useReactQuery';
+import { ItemData } from './types/master';
+import { QueryClient, QueryClientProvider } from 'react-query';
 /**
  * 근데 아래의 것들을 굳이 테스트해야 할까?
  * 그래도 일단 제대로 호출 되었는지는 알아야 하니까 체크를 해보자. 공부도 할 겸
