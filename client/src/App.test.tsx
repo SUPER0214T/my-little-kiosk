@@ -27,10 +27,6 @@ describe('setup', () => {
   afterEach(() => {
     mockAxios.resetHistory();
   });
-  // const mockStore = configureStore();
-  // const store = mockStore({
-  //   master: { itemData: [] },
-  // });
 
   it('메인 페이지에는 주문하기 버튼이 존재한다.', async () => {
     renderSimplify();
