@@ -40,7 +40,7 @@ describe('useBasket', () => {
 
     const basketItemInfoList = combineBasketInfo(basketList, itemDataList);
 
-    const { result } = renderHook(() => useBasket(basketList));
+    const { result } = renderHook(() => useBasket());
     expect(result.current.getTotalBasketAmount(basketItemInfoList)).toBe(1500);
   });
 
@@ -54,7 +54,7 @@ describe('useBasket', () => {
 
     const basketItemInfoList = combineBasketInfo(basketList, itemDataList);
 
-    const { result } = renderHook(() => useBasket(basketList));
+    const { result } = renderHook(() => useBasket());
     expect(result.current.getTotalBasketAmount(basketItemInfoList)).toBe(6000);
   });
 
@@ -72,7 +72,7 @@ describe('useBasket', () => {
 
     const basketItemInfoList = combineBasketInfo(basketList, itemDataList);
 
-    const { result } = renderHook(() => useBasket(basketList));
+    const { result } = renderHook(() => useBasket());
     expect(result.current.getTotalBasketAmount(basketItemInfoList)).toBe(3900);
   });
 });
