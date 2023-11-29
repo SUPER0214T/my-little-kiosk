@@ -1,10 +1,10 @@
 import MockAdapter from 'axios-mock-adapter';
-import { customAxios } from '../../../../services/axios';
-import { API_LIST } from '../../../../constants/apiList';
-import { mockMasterItemData } from '../../../../mocks/handlers';
+import { customAxios } from '../../services/axios';
+import { API_LIST } from '../../constants/apiList';
+import { mockMasterItemData } from '../../mocks/handlers';
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { goToOrderFlow, renderSimplify } from '../../../../utils/testUtils';
+import { goToOrderFlow, renderSimplify } from '../../utils/testUtils';
 
 describe('OrderItem', () => {
   let mockAxios = new MockAdapter(customAxios);

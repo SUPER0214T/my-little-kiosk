@@ -1,7 +1,6 @@
-import React from 'react';
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { goToOrderFlow, renderSimplify } from '../../../../utils/testUtils';
+import { goToOrderFlow, renderSimplify } from '../../utils/testUtils';
 
 describe('Header 컴포넌트', () => {
   it('Home 버튼이 존재한다.', async () => {

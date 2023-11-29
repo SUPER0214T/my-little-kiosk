@@ -1,4 +1,4 @@
-import { goToOrderFlow, renderSimplify } from '../../../../utils/testUtils';
+import { goToOrderFlow, renderSimplify } from '../../utils/testUtils';
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
