@@ -1,16 +1,17 @@
 import React from 'react';
-import OrderItem from './OrderItem';
-import useMaster from '../../../hooks/useMaster';
+import OrderItem from '../OrderItem/OrderItem';
+import useMaster from '../../../../hooks/useMaster';
+import * as S from './OrderList.styles';
 
 function OrderList() {
   const { getMasterData } = useMaster();
 
   return (
-    <div className="order-list" data-testid="order-list">
+    <S.Wrapper data-testid="order-list">
       {getMasterData().map((item) => (
         <OrderItem itemData={item} />
       ))}
-    </div>
+    </S.Wrapper>
   );
 }
 

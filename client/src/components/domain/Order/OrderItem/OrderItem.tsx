@@ -1,6 +1,7 @@
 import React from 'react';
-import { ItemData } from '../../../types/master';
-import { useGoTo } from '../../../hooks/useGoTo';
+import { ItemData } from '../../../../types/master';
+import { useGoTo } from '../../../../hooks/useGoTo';
+import * as S from './OrderItem.styles';
 
 interface OrderItemProps {
   itemData: ItemData;
@@ -18,13 +19,13 @@ function OrderItem({ itemData }: OrderItemProps) {
   };
 
   return (
-    <div className="order-item" onClick={handleItemClick}>
+    <S.Wrapper onClick={handleItemClick}>
       <div className="image-wrapper">
         <img src={itemData.IMG_URL} alt="상세 이미지" />
       </div>
       <div className="name">{itemData.ITEM_NM}</div>
       <div className="price">{itemData.ITEM_PRIC}원</div>
-    </div>
+    </S.Wrapper>
   );
 }
 
