@@ -28,6 +28,14 @@ function CheckoutItem({ basketItem, index }: CheckoutItemProps) {
     dispatch(increaseBasketItemQty({ index }));
   };
 
+  const getItemPrice = () => {
+    if (!itemInfo) {
+      throw new Error('itemInfo가 존재하지 않습니다.');
+    }
+
+    return itemInfo.ITEM_PRIC * basketItem.qty;
+  };
+
   /**
    * @todo 아래의 방식이 맞을까? 개선할 수 있는 방법을 찾아보자.
    */
@@ -48,8 +56,7 @@ function CheckoutItem({ basketItem, index }: CheckoutItemProps) {
         </div>
         <div className="right">
           <div className="item-name">{itemInfo.ITEM_NM}</div>
-          {/* @todo 아래 계산 방식 개선 필요 */}
-          <div className="item-price">{itemInfo.ITEM_PRIC * basketItem.qty}</div>
+          <div className="item-price">{getItemPrice()}</div>
         </div>
       </div>
       <Counter handleMinusClick={handleMinusClick} handlePlusClick={handlePlusClick} qty={basketItem.qty} />
