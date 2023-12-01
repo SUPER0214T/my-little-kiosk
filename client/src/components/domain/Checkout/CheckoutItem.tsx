@@ -18,6 +18,15 @@ function CheckoutItem({ basketItem, index }: CheckoutItemProps) {
    * @todo 아래의 방식이 좋은 방식일까?
    */
   const [itemInfo] = useState(findItemByItemCd(basketItem.itemCd));
+  // const itemInfo = findItemByItemCd(basketItem.itemCd);
+
+  const handleMinusClick = () => {
+    dispatch(decreaseBasketItemQty({ index }));
+  };
+
+  const handlePlusClick = () => {
+    dispatch(increaseBasketItemQty({ index }));
+  };
 
   /**
    * @todo 아래의 방식이 맞을까? 개선할 수 있는 방법을 찾아보자.
@@ -31,15 +40,6 @@ function CheckoutItem({ basketItem, index }: CheckoutItemProps) {
   /**
    * @todo 아래의 방식에서는 클래스를 사용하였는데 styled components에서 className을 허용하는 기준이 어떻게 될까?
    */
-
-  const handleMinusClick = () => {
-    dispatch(decreaseBasketItemQty({ index }));
-  };
-
-  const handlePlusClick = () => {
-    dispatch(increaseBasketItemQty({ index }));
-  };
-
   return (
     <S.Item>
       <div className="item-info">
