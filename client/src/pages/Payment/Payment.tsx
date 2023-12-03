@@ -8,6 +8,7 @@ import * as S from './Payment.styles';
 import { resetPaymentInfo, updatePaymentInfo } from '../../redux/paymentSlice';
 import { PaymentType } from '../../types/payment';
 import useMaster from '../../hooks/useMaster';
+import PaymentCard from '../../components/domain/Payment/PaymentCard/PaymentCard';
 
 const PAYMENT_TYPE: PaymentType[] = ['credit', 'naver', 'kakao'];
 
@@ -59,9 +60,11 @@ function Payment() {
       <S.PaymentSelect>
         <S.PaymentList>
           {PAYMENT_TYPE.map((el) => (
-            <S.PaymentCard onClick={() => handlePaymentCardClick(el)} isSelected={el === currentPaymentType}>
-              {el}
-            </S.PaymentCard>
+            <PaymentCard
+              isSelected={el === currentPaymentType}
+              handlePaymentCardClick={() => handlePaymentCardClick(el)}
+              paymentType={el}
+            />
           ))}
         </S.PaymentList>
       </S.PaymentSelect>
