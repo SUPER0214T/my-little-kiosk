@@ -6,11 +6,27 @@ import { PaymentType } from '../../../../types/payment';
 // @todo 또한 굳이 Payment에 있을 필요 없고 PaymentCard에서만 사용될 기능들은 옮기기
 type PaymentCardProps = {
   isSelected: boolean;
-  handlePaymentCardClick: () => void;
   paymentType: PaymentType;
+  setCurrentPaymentType: React.Dispatch<React.SetStateAction<PaymentType>>;
 };
 
-function PaymentCard({ isSelected, paymentType, handlePaymentCardClick }: PaymentCardProps) {
+function PaymentCard({ isSelected, paymentType, setCurrentPaymentType }: PaymentCardProps) {
+  const handlePaymentCardClick = () => {
+    switch (paymentType) {
+      case 'credit':
+        setCurrentPaymentType('credit');
+        break;
+      case 'naver':
+        setCurrentPaymentType('naver');
+        break;
+      case 'kakao':
+        setCurrentPaymentType('kakao');
+        break;
+      default:
+        throw new Error(`${paymentType}는 처리될 수 없는 paymentType입니다.`);
+    }
+  };
+
   return (
     <S.Layout onClick={handlePaymentCardClick} isSelected={isSelected}>
       {paymentType}

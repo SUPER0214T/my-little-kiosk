@@ -27,23 +27,6 @@ function Payment() {
     goToOrder();
   };
 
-  // @todo 컴포넌트 분리 필요
-  const handlePaymentCardClick = (paymentType: PaymentType) => {
-    switch (paymentType) {
-      case 'credit':
-        setCurrentPaymentType('credit');
-        break;
-      case 'naver':
-        setCurrentPaymentType('naver');
-        break;
-      case 'kakao':
-        setCurrentPaymentType('kakao');
-        break;
-      default:
-        throw new Error(`${paymentType}는 처리될 수 없는 paymentType입니다.`);
-    }
-  };
-
   const handleConfirmClick = () => {
     if (totalBasketAmount <= 0) {
       throw new Error(`총 결제 금액이 잘못되었습니다. \n 총 결제 금액: ${totalBasketAmount}`);
@@ -61,8 +44,8 @@ function Payment() {
         <S.PaymentList>
           {PAYMENT_TYPE.map((el) => (
             <PaymentCard
+              setCurrentPaymentType={setCurrentPaymentType}
               isSelected={el === currentPaymentType}
-              handlePaymentCardClick={() => handlePaymentCardClick(el)}
               paymentType={el}
             />
           ))}
