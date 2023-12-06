@@ -5,8 +5,8 @@ export const Wrapper = styled.div`
   position: sticky;
   right: 0;
   bottom: 0;
-  background-color: white;
-  border-top: 1px solid black;
+  background-color: ${({ theme }) => theme.white};
+  border-top: 1px solid ${({ theme }) => theme.black};
   padding: 0.5rem;
 `;
 
@@ -29,9 +29,14 @@ export const Btn = css`
 `;
 
 export const CouponBtn = styled.div`
-  ${Btn}
+  ${Btn};
+  border-color: ${(props) => props.theme.primary};
+  color: ${(props) => props.theme.primary};
 `;
 
 export const CheckoutBtn = styled.div`
-  ${Btn}
+  ${Btn};
+  background-color: ${(props) => props.theme.primary};
+  border-color: ${(props) => props.theme.primary};
+  color: ${(props) => props.theme.white};
 `;

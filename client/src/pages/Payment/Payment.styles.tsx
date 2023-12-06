@@ -47,8 +47,13 @@ const Btn = css`
 
 export const CancelBtn = styled.div`
   ${Btn};
+  border-color: ${({ theme }) => theme.primary};
+  color: ${({ theme }) => theme.primary};
 `;
 
 export const ConfirmBtn = styled.div`
   ${Btn};
+  background-color: ${({ theme }) => theme.primary};
+  border-color: ${({ theme }) => theme.primary};
+  color: ${({ theme }) => theme.white};
 `;

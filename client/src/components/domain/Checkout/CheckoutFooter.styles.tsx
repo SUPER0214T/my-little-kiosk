@@ -7,9 +7,9 @@ export const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  border-top: 1px solid black;
+  border-top: 1px solid ${({ theme }) => theme.black};
   padding: 1rem;
-  background-color: white;
+  background-color: ${({ theme }) => theme.white};
 `;
 
 export const Btn = css`
@@ -25,9 +25,14 @@ export const Btn = css`
 `;
 
 export const PrevBtn = styled.div`
-  ${Btn}
+  ${Btn};
+  border-color: ${({ theme }) => theme.primary};
+  color: ${({ theme }) => theme.primary};
 `;
 
 export const PaymentBtn = styled.div`
-  ${Btn}
+  ${Btn};
+  background-color: ${({ theme }) => theme.primary};
+  border-color: ${({ theme }) => theme.primary};
+  color: ${({ theme }) => theme.white};
 `;

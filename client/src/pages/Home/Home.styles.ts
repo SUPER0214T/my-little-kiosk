@@ -21,7 +21,8 @@ const OrderBtn = styled.div<{ isDisabled: boolean }>`
   justify-content: center;
   align-items: center;
   font-size: 2rem;
-  background-color: ${(props) => (props.isDisabled ? 'gray' : 'white')};
+  background-color: ${(props) => (props.isDisabled ? props.theme.white : props.theme.primary)};
+  color: ${(props) => props.theme.white};
   padding: 32px 56px;
   border-radius: 16px;
   margin-left: 50px;
@@ -36,13 +37,15 @@ const OrderBtn = styled.div<{ isDisabled: boolean }>`
 
 const MasterDownBtn = styled.div`
   position: absolute;
-  left: 0;
-  top: 0;
-  font-size: 1.5rem;
+  left: 8px;
+  top: 8px;
   padding: 10px;
-  border-radius: 1rem;
-  background-color: white;
+  border-radius: 0.5rem;
+  background-color: ${({ theme }) => theme.white};
   cursor: pointer;
+  background-color: ${(props) => props.theme.white};
+  color: ${(props) => props.theme.primary};
+  border: 1px solid ${(props) => props.theme.primary};
 `;
 
 export { Wrapper, OrderBtn, MasterDownBtn };

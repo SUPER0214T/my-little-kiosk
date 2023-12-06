@@ -21,4 +21,7 @@ export const Btn = css`
 
 export const GoToHomeBtn = styled.div`
   ${Btn};
+  background-color: ${({ theme }) => theme.primary};
+  border-color: ${({ theme }) => theme.primary};
+  color: ${({ theme }) => theme.white};
 `;

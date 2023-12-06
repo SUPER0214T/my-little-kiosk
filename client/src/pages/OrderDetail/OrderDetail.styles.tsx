@@ -31,6 +31,7 @@ export const Btn = css`
   align-items: center;
   margin: 2rem;
   padding: 1rem;
+  // 아래는 theme을 어떻게?
   border: 1px solid black;
   border-radius: 2rem;
   min-width: 150px;
@@ -39,10 +40,13 @@ export const Btn = css`
 
 export const CancelBtn = styled.div`
   ${Btn};
+  border-color: ${({ theme }) => theme.primary};
+  color: ${({ theme }) => theme.primary};
 `;
 
 export const ConfirmBtn = styled.div`
   ${Btn};
-  background-color: ${({ theme }) => theme.light.primary1};
-  border-color: ${({ theme }) => theme.light.primary1};
+  background-color: ${({ theme }) => theme.primary};
+  border-color: ${({ theme }) => theme.primary};
+  color: ${({ theme }) => theme.white};
 `;

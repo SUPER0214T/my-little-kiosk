@@ -6,12 +6,11 @@ export const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   position: relative;
-  border-bottom: 1px solid ${({ theme }) => theme.light.border1};
+  border-bottom: 1px solid ${({ theme }) => theme.black};
 `;
 
 export const HomeBtn = styled.div`
   padding: 6px 8px;
-  border: 1px solid black;
   border-radius: 1rem;
   display: flex;
   justify-content: center;
@@ -19,6 +18,11 @@ export const HomeBtn = styled.div`
   cursor: pointer;
   position: absolute;
   left: 1rem;
+  background-color: ${(props) => props.theme.white};
+  color: ${(props) => props.theme.primary};
+  border: 1px solid ${(props) => props.theme.primary};
 `;
 
-export const Logo = styled.div``;
+export const Logo = styled.div`
+  color: ${(props) => props.theme.primary};
+`;
