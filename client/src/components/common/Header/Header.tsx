@@ -1,6 +1,6 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import { HomeBtn, Logo, Wrapper } from './Header.styles';
+import * as S from './Header.styles';
 import { useGoTo } from '../../../hooks/useGoTo';
 import { ROUTES } from '../../../constants/routes';
 
@@ -17,19 +17,19 @@ function Header() {
   const isBlackList = blackList.includes(pathname);
   if (isBlackList) {
     return (
-      <Wrapper>
-        <Logo>Logo</Logo>
-      </Wrapper>
+      <S.Wrapper>
+        <S.Logo>Logo</S.Logo>
+      </S.Wrapper>
     );
   }
 
   return (
-    <Wrapper>
-      <HomeBtn onClick={handleHomeBtnClick}>
+    <S.Wrapper>
+      <S.HomeBtn onClick={handleHomeBtnClick}>
         <span className="text">Home</span>
-      </HomeBtn>
-      <Logo>Logo</Logo>
-    </Wrapper>
+      </S.HomeBtn>
+      <S.Logo>Logo</S.Logo>
+    </S.Wrapper>
   );
 }
 

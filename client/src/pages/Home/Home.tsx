@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import React, { useEffect } from 'react';
 import { useQuery } from 'react-query';
-import { MasterDownBtn, OrderBtn, Wrapper } from './Home.styles';
+import * as S from './Home.styles';
 import { getMasterAll } from '../../services/master';
 import { useGoTo } from '../../hooks/useGoTo';
 import { ItemData } from '../../types/master';
@@ -41,12 +41,12 @@ function Home() {
   }, [dispatch]);
 
   return (
-    <Wrapper>
-      <MasterDownBtn onClick={handleMasterDownBtnClick}>마스터 수신</MasterDownBtn>
-      <OrderBtn onClick={handleOrderBtnClick} isDisabled={isLoading}>
+    <S.Wrapper>
+      <S.MasterDownBtn onClick={handleMasterDownBtnClick}>마스터 수신</S.MasterDownBtn>
+      <S.OrderBtn onClick={handleOrderBtnClick} isDisabled={isLoading}>
         주문하기
-      </OrderBtn>
-    </Wrapper>
+      </S.OrderBtn>
+    </S.Wrapper>
   );
 }
 
