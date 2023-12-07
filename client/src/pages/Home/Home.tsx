@@ -4,7 +4,7 @@ import { useQuery } from 'react-query';
 import * as S from './Home.styles';
 import { getMasterAll } from '../../services/master';
 import { useGoTo } from '../../hooks/useGoTo';
-import { ItemData } from '../../types/master';
+import { MasterData } from '../../types/master';
 import { useAppDispatch } from '../../hooks/useStore';
 import { resetBasketList } from '../../redux/basketSlice';
 import { resetPaymentInfo } from '../../redux/paymentSlice';
@@ -12,7 +12,7 @@ import { resetPaymentInfo } from '../../redux/paymentSlice';
 function Home() {
   const { goToOrder } = useGoTo();
   const dispatch = useAppDispatch();
-  const { data, isLoading, refetch } = useQuery<{ data: ItemData[] }>(['home', 'getMasterAll'], getMasterAll, {
+  const { data, isLoading, refetch } = useQuery<{ data: MasterData }>(['home', 'getMasterAll'], getMasterAll, {
     cacheTime: 1000 * 60 * 60 * 24,
     staleTime: 1000 * 60 * 60 * 24,
     onError: (err) => {
@@ -23,7 +23,7 @@ function Home() {
 
   const handleOrderBtnClick = () => {
     console.log(data);
-    const isMasterEmpty = data?.data.length === 0;
+    const isMasterEmpty = data?.data.ITEM_DATA.length === 0;
     if (isMasterEmpty) {
       throw new Error('master가 비어있습니다.');
     }

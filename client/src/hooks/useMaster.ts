@@ -1,10 +1,10 @@
-import { ItemData } from '../types/master';
+import { ItemData, MasterData } from '../types/master';
 import { useGetQueryData } from './useReactQuery';
 
 const useMaster = () => {
-  const itemData = useGetQueryData<{ data: ItemData[] }>(['home', 'getMasterAll']);
+  const itemData = useGetQueryData<{ data: MasterData }>(['home', 'getMasterAll']);
 
-  const getMasterData = (): ItemData[] => {
+  const getMasterData = (): MasterData => {
     if (itemData) {
       return itemData.data;
     }
@@ -13,7 +13,7 @@ const useMaster = () => {
   };
 
   const findItemByItemCd = (itemCd = ''): ItemData | undefined => {
-    return getMasterData().find((item) => item.ITEM_CD === itemCd);
+    return getMasterData().ITEM_DATA.find((item) => item.ITEM_CD === itemCd);
   };
 
   return { findItemByItemCd, getMasterData };

@@ -26,7 +26,9 @@ function Checkout() {
   const { getTotalBasketAmount } = useBasket();
   const { getMasterData } = useMaster();
 
-  const totalBasketAmount = getTotalBasketAmount(combineBasketInfo(basketReducer.basketList, getMasterData()));
+  const totalBasketAmount = getTotalBasketAmount(
+    combineBasketInfo(basketReducer.basketList, getMasterData().ITEM_DATA),
+  );
 
   return (
     <div>

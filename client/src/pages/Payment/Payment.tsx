@@ -16,7 +16,9 @@ function Payment() {
   const { basketReducer } = useAppSelector((state) => state);
   const { getTotalBasketAmount } = useBasket();
   const { getMasterData } = useMaster();
-  const totalBasketAmount = getTotalBasketAmount(combineBasketInfo(basketReducer.basketList, getMasterData()));
+  const totalBasketAmount = getTotalBasketAmount(
+    combineBasketInfo(basketReducer.basketList, getMasterData().ITEM_DATA),
+  );
   const [currentPaymentType, setCurrentPaymentType] = useState<PaymentType>('credit');
 
   const { goToOrder, goToConfirmation } = useGoTo();

@@ -8,7 +8,7 @@ function OrderList() {
 
   return (
     <S.Wrapper data-testid="order-list">
-      {getMasterData().map((item) => (
+      {getMasterData().ITEM_DATA.map((item) => (
         <OrderItem itemData={item} />
       ))}
     </S.Wrapper>

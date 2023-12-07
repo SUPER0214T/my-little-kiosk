@@ -4,3 +4,5 @@ export type ItemData = {
   ITEM_PRIC: number;
   IMG_URL: string;
 };
+
+export type MasterData = { ITEM_DATA: ItemData[]; BADGE_LIST: string[] };
