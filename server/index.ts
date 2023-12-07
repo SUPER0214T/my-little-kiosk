@@ -3,6 +3,7 @@ import express, { Request, Response } from "express";
 // @ts-ignore
 import morgan from "morgan";
 import { createItemData } from "./utils/createItemData";
+import { createBadgeData } from "./utils/createBadgeData";
 
 const app = express();
 
@@ -21,7 +22,7 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 app.get("/api/master", (req: Request, res: Response) => {
-  res.json(createItemData());
+  res.json({ ITEM_DATA: createItemData(), BADGE_LIST: createBadgeData() });
 });
 
 app.post("/api/tr/save", (req: Request, res: Response) => {
