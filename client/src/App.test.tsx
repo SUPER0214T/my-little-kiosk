@@ -6,7 +6,7 @@ import { API_LIST } from './constants/apiList';
 import { mockMasterItemData } from './mocks/handlers';
 import { goToOrderFlow, renderSimplify } from './utils/testUtils';
 import { useGetQueryData } from './hooks/useReactQuery';
-import { ItemData } from './types/master';
+import { ItemData, MasterData } from './types/master';
 import { QueryClient, QueryClientProvider } from 'react-query';
 /**
  * 근데 아래의 것들을 굳이 테스트해야 할까?
@@ -74,11 +74,11 @@ describe('setup', () => {
       <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
     );
 
-    const { result } = renderHook(() => useGetQueryData<{ data: ItemData[] }>(['home', 'getMasterAll']), {
+    const { result } = renderHook(() => useGetQueryData<{ data: MasterData }>(['home', 'getMasterAll']), {
       wrapper,
     });
 
     console.log('result: ', result.current?.data);
-    await waitFor(() => expect(result.current?.data).toHaveLength(4));
+    await waitFor(() => expect(result.current?.data.ITEM_DATA).toHaveLength(4));
   });
 });

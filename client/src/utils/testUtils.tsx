@@ -8,6 +8,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { rootReducer } from '../redux/rootReducer';
 import logger from 'redux-logger';
 import { QueryCache, QueryClient, QueryClientProvider } from 'react-query';
+import theme from '../styles/theme';
 
 // redux
 export const createStore = () =>
@@ -40,7 +41,7 @@ export const goToOrderFlow = async () => {
   const orderBtn = await screen.findByText('주문하기');
   await waitFor(
     () => {
-      expect(orderBtn).toHaveStyle({ backgroundColor: 'white' });
+      expect(orderBtn).toHaveStyle({ backgroundColor: theme.primary });
     },
     {
       timeout: 1000,
